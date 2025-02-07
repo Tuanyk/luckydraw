@@ -53,9 +53,17 @@
 @layer components {
   .slot-machine-container {
     @apply min-h-screen bg-gradient-to-b from-purple-950 to-indigo-950;
-    background-image: linear-gradient(to bottom, rgb(30, 17, 51) 0%, rgb(26, 23, 68) 100%);
+    background-image: url("/background.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
   }
-
+  h1.slot-title {
+    color: white;
+    font-weight: 700;
+    font-size: 50px;
+    color: #cc3333;
+  }
   .slot-machine-frame {
     @apply bg-indigo-950/50 backdrop-blur-sm;
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.1), 0 0 40px rgba(255, 215, 0, 0.05);

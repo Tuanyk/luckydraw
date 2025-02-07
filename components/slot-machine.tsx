@@ -7,6 +7,10 @@ import SlotCard from "./slot-card"
 import { Button } from "@/components/ui/button"
 import { fetchSlotMachineData } from "@/lib/api"
 import type { SlotMachineData } from "@/types/slot-machine"
+import { Kristi } from 'next/font/google'
+import Image from 'next/image'
+
+const kristi = Kristi({ subsets: ['latin' ], weight: "400"})
 
 export default function SlotMachine() {
   const [spinning, setSpinning] = useState(false)
@@ -20,6 +24,7 @@ export default function SlotMachine() {
   })
   const [initialValues, setInitialValues] = useState<number[]>([])
   const [currentValues, setCurrentValues] = useState<number[]>([])
+  
 
   const { toast } = useToast()
 
@@ -120,7 +125,14 @@ export default function SlotMachine() {
 
   return (
     <div className="slot-machine-container flex flex-col items-center justify-center p-8">
-      <h1>Vòng quay 8386</h1>
+      <Image 
+        src="/logo.png"
+        alt="Logo"
+        width={618}
+        height={150}
+        priority 
+      />
+      <h1 className={`slot-title ${kristi.className}`}>Vòng quay 8386</h1>
       <div className="slot-machine-frame rounded-2xl">
         <div className="flex space-x-4 mb-8">
           {data.finalResult.map((_, index) => (

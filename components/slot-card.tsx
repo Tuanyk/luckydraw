@@ -25,7 +25,7 @@ export default function SlotCard({ spinning, items, initialValue, currentValue }
   }, [spinning, items, currentValue])
 
   return (
-    <div className="w-40 h-52 rounded-xl shadow-lg overflow-hidden flex items-center justify-center slot-card">
+    <div className="rounded-xl shadow-lg overflow-hidden flex items-center justify-center slot-card">
       <AnimatePresence mode="wait">
         <motion.div
           key={displayedValue}
@@ -35,8 +35,8 @@ export default function SlotCard({ spinning, items, initialValue, currentValue }
           transition={{ duration: spinning ? 0.1 : 0.2 }}
           className={`relative ${spinning ? "blur-sm" : ""}`}
         >
-          <div className="w-16 h-16 from-indigo-600 to-indigo-800 flex items-center justify-center shadow-xl">
-            <span className="text-8xl font-bold text-white">{displayedValue}</span>
+          <div className="w-12 h-16 from-indigo-600 to-indigo-800 flex items-center justify-center shadow-xl">
+            <span className="text-2xl font-bold">{displayedValue}</span>
           </div>
           {spinning && <div className="absolute inset-0 bg-indigo-500/20 backdrop-blur-sm rounded-full" />}
         </motion.div>

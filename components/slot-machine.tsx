@@ -8,10 +8,9 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { fetchSlotMachineData } from "@/lib/api"
 import type { SlotMachineData } from "@/types/slot-machine"
-import { Kristi } from 'next/font/google'
-import Image from 'next/image'
+import { Roboto } from 'next/font/google'
 
-const kristi = Kristi({ subsets: ['latin' ], weight: "400"})
+const roboto = Roboto({weight: "400", subsets: ['latin']})
 
 export default function SlotMachine() {
   const [spinning, setSpinning] = useState(false)
@@ -127,16 +126,10 @@ export default function SlotMachine() {
 
   return (
     <div className="slot-machine-container flex flex-col items-center justify-center p-8">
-      <Image 
-        src="/logo.png"
-        alt="Logo"
-        width={618}
-        height={150}
-        priority 
-      />
-      <h1 className={`slot-title ${kristi.className}`}>Vòng quay 8386</h1>
+      
       <div className="slot-machine-frame rounded-2xl">
-        <div className="flex space-x-4 mb-8">
+        <h2 className={`text-white text-center text-2xl mb-3 mt-2 ${roboto.className}`}>Ngày 1</h2>
+        <div className="flex space-x-4 mb-4">
           {data.finalResult.map((_, index) => (
             <SlotCard
               key={index}
@@ -155,7 +148,7 @@ export default function SlotMachine() {
             Dừng quay
           </Button>
         </div>
-        <div className="flex justify-center mt-4">
+        <div className="justify-center mt-4 hidden">
           <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
             <DialogTrigger asChild>
               <Button className="list-button slot-button">Danh sách</Button>

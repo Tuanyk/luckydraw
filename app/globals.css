@@ -66,38 +66,37 @@
   }
   .slot-machine-frame {
     @apply bg-indigo-950/50 backdrop-blur-sm;
+    background-color: #2a254f;
     box-shadow: 0 0 20px rgba(255, 215, 0, 0.1), 0 0 40px rgba(255, 215, 0, 0.05);
     border: 2px solid rgba(255, 215, 0, 0.3);
     padding: 10px;
   }
-
+  .slot-card {
+    background-color: #413971;
+  }
   .slot-button {
-    @apply font-bold px-12 py-6 text-2xl rounded-xl shadow-lg 
-           transition-all duration-200 disabled:opacity-50 
-           uppercase tracking-wider min-w-[200px]
-           transform hover:scale-105 active:scale-95;
+    background-image: url("/btn-yellow-bg.jpg");
+    background-repeat: no-repeat;
+    background-position: center center;
+    background-size: cover;
+    font-size: 26px !important;
+    height: 62px !important;
+    min-width: 250px !important;
+    font-weight: 700 !important;
   }
 
   .spin-button {
-    @apply bg-gradient-to-r from-yellow-400 to-yellow-300 
-           hover:from-yellow-300 hover:to-yellow-200 
-           text-yellow-900;
     text-shadow: 0 1px 2px rgba(255, 255, 255, 0.5);
-    font-size: 26px;
     font-weight: 700;
     text-transform: uppercase;
     color: #6a4c08;
-    height: 62px;
   }
 
   .edit-button {
-    @apply bg-indigo-600 hover:bg-indigo-700 text-white;
     text-shadow: 0 1px 2px rgba(0, 0, 0, 0.5);
-    font-size: 26px;
     font-weight: 700;
     text-transform: uppercase;
-    color: #463996;
-    height: 60px;
+    color: #cc3333;
   }
 }
 

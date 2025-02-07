@@ -18,6 +18,8 @@ export default function SlotMachine() {
     items: [],
     finalResult: [],
   })
+  const [initialValues, setInitialValues] = useState<number[]>([])
+  const [currentValues, setCurrentValues] = useState<number[]>([])
 
   const { toast } = useToast()
 
@@ -33,6 +35,11 @@ export default function SlotMachine() {
         throw new Error(response.error || "Failed to load slot machine data")
       }
       setData(response.data)
+      const randomInitialValues = response.data.finalResult.map(
+        () => response.data.items[Math.floor(Math.random() * response.data.items.length)],
+      )
+      setInitialValues(randomInitialValues)
+      setCurrentValues(randomInitialValues)
       setError(null)
     } catch (err) {
       setError(err instanceof Error ? err.message : "An error occurred")
@@ -72,6 +79,11 @@ export default function SlotMachine() {
         setTimeout(
           () => {
             setStoppedCards(index + 1)
+            setCurrentValues((prev) => {
+              const newValues = [...prev]
+              newValues[index] = data.finalResult[index]
+              return newValues
+            })
             if (index === data.finalResult.length - 1) {
               setSpinning(false)
               setStopping(false)
@@ -85,7 +97,7 @@ export default function SlotMachine() {
         stopCard(i)
       }
     }
-  }, [stopping, data.finalResult.length])
+  }, [stopping, data.finalResult])
 
   if (loading) {
     return (
@@ -108,14 +120,16 @@ export default function SlotMachine() {
 
   return (
     <div className="slot-machine-container flex flex-col items-center justify-center p-8">
-      <div className="slot-machine-frame p-8 rounded-2xl">
+      <h1>Vòng quay 8386</h1>
+      <div className="slot-machine-frame rounded-2xl">
         <div className="flex space-x-4 mb-8">
           {data.finalResult.map((_, index) => (
             <SlotCard
               key={index}
               spinning={spinning && stoppedCards <= index}
-              finalValue={data.finalResult[index]}
               items={data.items}
+              initialValue={initialValues[index]}
+              currentValue={currentValues[index]}
             />
           ))}
         </div>
@@ -124,7 +138,7 @@ export default function SlotMachine() {
             Quay số
           </Button>
           <Button onClick={stop} disabled={!spinning || stopping} className="slot-button edit-button">
-            Chỉnh sửa
+            Dừng quay
           </Button>
         </div>
       </div>

@@ -5,6 +5,7 @@ import { useToast } from "@/hooks/use-toast"
 import { Loader2 } from "lucide-react"
 import SlotCard from "./slot-card"
 import { Button } from "@/components/ui/button"
+import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { fetchSlotMachineData } from "@/lib/api"
 import type { SlotMachineData } from "@/types/slot-machine"
 import { Kristi } from 'next/font/google'
@@ -21,11 +22,12 @@ export default function SlotMachine() {
   const [data, setData] = useState<SlotMachineData>({
     items: [],
     finalResult: [],
+    listItems: [],
   })
   const [initialValues, setInitialValues] = useState<number[]>([])
   const [currentValues, setCurrentValues] = useState<number[]>([])
   
-
+  const [isDialogOpen, setIsDialogOpen] = useState(false)
   const { toast } = useToast()
 
   useEffect(() => {
@@ -152,6 +154,25 @@ export default function SlotMachine() {
           <Button onClick={stop} disabled={!spinning || stopping} className="slot-button edit-button">
             Dừng quay
           </Button>
+        </div>
+        <div className="flex justify-center mt-4">
+          <Dialog open={isDialogOpen} onOpenChange={setIsDialogOpen}>
+            <DialogTrigger asChild>
+              <Button className="list-button slot-button">Danh sách</Button>
+            </DialogTrigger>
+            <DialogContent className="sm:max-w-[425px]">
+              <DialogHeader>
+                <DialogTitle>Danh sách quay</DialogTitle>
+              </DialogHeader>
+              <div className="grid gap-4 py-4">
+                {data.listItems.map((item, index) => (
+                  <div key={index} className="bg-gray-100 p-3 rounded-lg text-center text-lg font-semibold">
+                    {item}
+                  </div>
+                ))}
+              </div>
+            </DialogContent>
+          </Dialog>
         </div>
       </div>
     </div>

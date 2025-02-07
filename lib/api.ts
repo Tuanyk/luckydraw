@@ -10,7 +10,7 @@ export async function fetchSlotMachineData(): Promise<ApiResponse> {
   } catch (error) {
     return {
       success: false,
-      data: { items: [], finalResult: [] },
+      data: { items: [], finalResult: [], listItems: [] },
       error: error instanceof Error ? error.message : "Unknown error occurred",
     }
   }

@@ -1,6 +1,7 @@
 export interface SlotMachineData {
     items: number[]
     finalResult: number[]
+    listItems: string[]
   }
   
   export interface ApiResponse {

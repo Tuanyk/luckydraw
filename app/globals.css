@@ -62,7 +62,7 @@ main {
 @layer components {
   .slot-machine-container {
     @apply min-h-screen bg-gradient-to-b from-purple-950 to-indigo-950;
-    background-image: url("/background.png");
+    background-image: url("/background.jpeg");
     background-repeat: no-repeat;
     background-position: center center;
     background-size: contain;

@@ -115,7 +115,7 @@ export default function SlotMachine() {
               setStopping(false)
             }
           },
-          index < data.finalResult.length - 1 ? (index + 1) * 3000 : (data.finalResult.length - 1) * 3000 + 7000,
+          index < data.finalResult.length - 1 ? (index + 1) * 1000 : (data.finalResult.length - 1) * 1000 + 3000,
         )
       }
 

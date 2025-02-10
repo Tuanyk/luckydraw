@@ -10,6 +10,7 @@ import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { fetchSlotMachineData } from "@/lib/api"
 import type { SlotMachineData } from "@/types/slot-machine"
+
 // import { Roboto } from 'next/font/google'
 
 // const roboto = Roboto({weight: "400", subsets: ['latin']})
@@ -32,7 +33,7 @@ export default function SlotMachine() {
   const { toast } = useToast()
   const pathname = usePathname()
   const currentDay = Number.parseInt(pathname.split("-")[1]) || 1
-
+  const isDay = Number.parseInt(pathname.split("-")[1]) ? true : false
 
   useEffect(() => {
     loadSlotMachineData()
@@ -144,7 +145,7 @@ export default function SlotMachine() {
   }
 
   return (
-    <div className="slot-machine-container flex flex-col items-center justify-center p-4">
+    <div className="slot-machine-container flex flex-col items-center justify-center p-4"  style={ isDay? { backgroundImage: `url(/background${currentDay}.png)`} : {}}>
       
       <div className="slot-machine-frame rounded-2xl">
         {/* <h2 className={`text-white text-center text-2xl mb-3 mt-2 ${roboto.className}`}>Ngày 1</h2> */}

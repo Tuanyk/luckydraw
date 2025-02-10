@@ -46,6 +46,18 @@ export default function SlotMachine() {
         throw new Error(response.error || "Failed to load slot machine data")
       }
       setData(response.data)
+      const { listItems } = response.data
+
+      const selectedItem = listItems.length > 0 
+      ? String(listItems[Math.floor(Math.random() * listItems.length)])  // Convert to string
+      : ""
+
+      const finalResult = selectedItem.split("").map(char => Number(char))
+
+      // Update state
+      setData({ ...response.data, finalResult })
+
+
       const randomInitialValues = response.data.finalResult.map(
         () => response.data.items[Math.floor(Math.random() * response.data.items.length)],
       )
@@ -130,11 +142,11 @@ export default function SlotMachine() {
   }
 
   return (
-    <div className="slot-machine-container flex flex-col items-center justify-center p-6">
+    <div className="slot-machine-container flex flex-col items-center justify-center p-4">
       
       <div className="slot-machine-frame rounded-2xl">
         {/* <h2 className={`text-white text-center text-2xl mb-3 mt-2 ${roboto.className}`}>Ngày 1</h2> */}
-        <div className="flex space-x-4 mb-4">
+        <div className="flex space-x-2 mb-4">
           {data.finalResult.map((_, index) => (
             <SlotCard
               key={index}

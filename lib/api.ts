@@ -1,8 +1,8 @@
 import type { ApiResponse } from "@/types/slot-machine"
 
-export async function fetchSlotMachineData(): Promise<ApiResponse> {
+export async function fetchSlotMachineData(day: number): Promise<ApiResponse> {
   try {
-    const response = await fetch("https://vongquaymayman.pantravel.vn/luckydraw.json")
+    const response = await fetch(`https://vongquaymayman.pantravel.vn/luckydraw_${day}.json`)
     if (!response.ok) {
       throw new Error("Failed to fetch slot machine data")
     }

@@ -3,14 +3,16 @@
 import { useState, useEffect } from "react"
 import { useToast } from "@/hooks/use-toast"
 import { Loader2 } from "lucide-react"
+import Link from "next/link"
+import { usePathname } from "next/navigation"
 import SlotCard from "./slot-card"
 import { Button } from "@/components/ui/button"
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog"
 import { fetchSlotMachineData } from "@/lib/api"
 import type { SlotMachineData } from "@/types/slot-machine"
-import { Roboto } from 'next/font/google'
+// import { Roboto } from 'next/font/google'
 
-const roboto = Roboto({weight: "400", subsets: ['latin']})
+// const roboto = Roboto({weight: "400", subsets: ['latin']})
 
 export default function SlotMachine() {
   const [spinning, setSpinning] = useState(false)
@@ -28,6 +30,9 @@ export default function SlotMachine() {
   
   const [isDialogOpen, setIsDialogOpen] = useState(false)
   const { toast } = useToast()
+  const pathname = usePathname()
+  const currentDay = Number.parseInt(pathname.split("-")[1]) || 1
+
 
   useEffect(() => {
     loadSlotMachineData()
@@ -36,7 +41,7 @@ export default function SlotMachine() {
   async function loadSlotMachineData() {
     try {
       setLoading(true)
-      const response = await fetchSlotMachineData()
+      const response = await fetchSlotMachineData(currentDay)
       if (!response.success || !response.data) {
         throw new Error(response.error || "Failed to load slot machine data")
       }
@@ -125,10 +130,10 @@ export default function SlotMachine() {
   }
 
   return (
-    <div className="slot-machine-container flex flex-col items-center justify-center p-8">
+    <div className="slot-machine-container flex flex-col items-center justify-center p-6">
       
       <div className="slot-machine-frame rounded-2xl">
-        <h2 className={`text-white text-center text-2xl mb-3 mt-2 ${roboto.className}`}>Ngày 1</h2>
+        {/* <h2 className={`text-white text-center text-2xl mb-3 mt-2 ${roboto.className}`}>Ngày 1</h2> */}
         <div className="flex space-x-4 mb-4">
           {data.finalResult.map((_, index) => (
             <SlotCard
@@ -168,6 +173,22 @@ export default function SlotMachine() {
           </Dialog>
         </div>
       </div>
+        {/* Navigation buttons */}
+        <div className="grid grid-cols-6 gap-4 mt-2">
+          {[1, 2, 3, 4, 5, 6].map((day) => (
+            <Link key={day} href={`/ngay-${day}`} passHref>
+              <Button
+                className={`w-full ${
+                  currentDay === day
+                    ? "bg-yellow-500 hover:bg-yellow-600 text-black"
+                    : "bg-blue-600 hover:bg-blue-700 text-white"
+                }`}
+              >
+                Ngày {day}
+              </Button>
+            </Link>
+          ))}
+        </div>
     </div>
   )
 }

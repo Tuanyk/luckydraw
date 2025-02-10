@@ -58,9 +58,11 @@ export default function SlotMachine() {
       setData({ ...response.data, finalResult })
 
 
-      const randomInitialValues = response.data.finalResult.map(
-        () => response.data.items[Math.floor(Math.random() * response.data.items.length)],
-      )
+      const randomInitialValues = Array.from({ length: 7 }, () => 
+        response.data.items[Math.floor(Math.random() * response.data.items.length)]
+    );
+
+    
       setInitialValues(randomInitialValues)
       setCurrentValues(randomInitialValues)
       setError(null)
